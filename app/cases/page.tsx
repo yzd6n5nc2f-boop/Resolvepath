@@ -60,7 +60,7 @@ export default function MyCasesPage(): JSX.Element {
                     <Link
                       href={`/cases/${entry.id}`}
                       onClick={(event) => event.stopPropagation()}
-                      className="inline-flex items-center gap-1 rounded-full border border-brand-navy/15 px-3 py-1.5 text-xs font-semibold text-brand-navy"
+                      className="inline-flex items-center gap-1 rounded-full border border-brand-navy/15 px-3 py-1.5 text-xs font-semibold text-black"
                     >
                       View
                       <ChevronRight className="h-3.5 w-3.5" />

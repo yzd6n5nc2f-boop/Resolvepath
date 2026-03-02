@@ -4,11 +4,11 @@ import { cn } from "@/lib/utils";
 type ChipVariant = "default" | "selected" | "success" | "warning" | "danger";
 
 const chipStyles: Record<ChipVariant, string> = {
-  default: "bg-brand-gray/75 text-brand-navy",
-  selected: "bg-brand-teal/15 text-brand-navy ring-1 ring-brand-teal/45",
-  success: "bg-brand-teal/15 text-brand-navy",
-  warning: "bg-brand-amber/20 text-brand-navy",
-  danger: "bg-[#F9C2B2]/40 text-brand-navy"
+  default: "bg-brand-gray/75 text-black",
+  selected: "bg-brand-navy text-white ring-1 ring-brand-navy/55",
+  success: "bg-brand-teal/20 text-black",
+  warning: "bg-brand-amber/30 text-black",
+  danger: "bg-[#F9C2B2]/50 text-black"
 };
 
 export function Chip({

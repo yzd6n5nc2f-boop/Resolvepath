@@ -58,7 +58,7 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
               className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                 activeTab === tab
                   ? "bg-brand-navy text-white"
-                  : "bg-brand-gray/60 text-brand-navy hover:bg-brand-gray"
+                  : "bg-brand-gray/60 text-black hover:bg-brand-gray"
               }`}
             >
               {tab}

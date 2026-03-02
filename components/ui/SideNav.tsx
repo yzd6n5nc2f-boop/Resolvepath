@@ -45,7 +45,7 @@ export function SideNav(): JSX.Element {
                 "flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition",
                 active
                   ? "bg-brand-navy text-white shadow-soft"
-                  : "text-brand-navy hover:bg-brand-gray/65"
+                  : "text-black hover:bg-brand-gray/65"
               )}
             >
               <Icon className="h-4 w-4" />
