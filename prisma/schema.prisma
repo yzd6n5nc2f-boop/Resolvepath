@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Case {
+  id               String         @id @default(uuid())
+  title            String
+  scenario         String
+  status           String         @default("DRAFT")
+  summary          String
+  tonePreference   String         @default("neutral")
+  lengthPreference String         @default("standard")
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  timelineEvents   TimelineEvent[]
+  outputVersions   OutputVersion[]
+
+  @@index([scenario])
+  @@index([status])
+}
+
+model TimelineEvent {
+  id        String   @id @default(uuid())
+  caseId    String
+  date      String
+  note      String
+  createdAt DateTime @default(now())
+  case      Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@index([caseId])
+  @@index([date])
+}
+
+model OutputVersion {
+  id           String   @id @default(uuid())
+  caseId       String
+  createdAt    DateTime @default(now())
+  mode         String
+  outputsJson  String
+  riskFlagsJson String
+  case         Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@index([caseId])
+  @@index([createdAt])
+}
+
+model Template {
+  id        String   @id @default(uuid())
+  scenario  String
+  name      String
+  body      String
+  createdAt DateTime @default(now())
+
+  @@index([scenario])
+}
+
+model Setting {
+  id                 Int      @id
+  disclaimerAccepted Boolean  @default(false)
+  acceptedAt         DateTime?
+  orgPolicyText      String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
