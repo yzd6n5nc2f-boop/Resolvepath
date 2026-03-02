@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --rp-navy: #1d3a5f;
-  --rp-teal: #3baa9c;
-  --rp-gray: #e8ebee;
-  --rp-amber: #f5a550;
-  --rp-ink: #2b3748;
+  --rp-navy: #921e2b;
+  --rp-teal: #e14040;
+  --rp-gray: #f9c2b2;
+  --rp-amber: #f48787;
+  --rp-ink: #6b2c35;
   --rp-cloud: #f3f6f9;
   --rp-white: #ffffff;
 }
@@ -25,9 +25,9 @@ body {
 body {
   color: var(--rp-ink);
   background:
-    radial-gradient(circle at 15% 5%, rgba(59, 170, 156, 0.09), transparent 36%),
-    radial-gradient(circle at 85% 16%, rgba(29, 58, 95, 0.09), transparent 42%),
-    linear-gradient(180deg, #f9fbfd 0%, #f3f6f9 100%);
+    radial-gradient(circle at 15% 5%, rgba(225, 64, 64, 0.10), transparent 36%),
+    radial-gradient(circle at 85% 16%, rgba(146, 30, 43, 0.10), transparent 42%),
+    linear-gradient(180deg, #f7f9fc 0%, #f3f6f9 100%);
 }
 
 a {
@@ -43,11 +43,11 @@ textarea {
 }
 
 .shadow-soft {
-  box-shadow: 0 8px 20px rgba(29, 58, 95, 0.08);
+  box-shadow: 0 8px 20px rgba(146, 30, 43, 0.08);
 }
 
 .shadow-card {
-  box-shadow: 0 14px 32px rgba(29, 58, 95, 0.09);
+  box-shadow: 0 14px 32px rgba(146, 30, 43, 0.10);
 }
 
 @media print {
