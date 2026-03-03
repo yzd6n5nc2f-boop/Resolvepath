@@ -13,29 +13,19 @@ interface ChatMessage {
   text: string;
 }
 
-function simulatedReply(character: string, difficulty: number, scenario: ScenarioKey): string {
-  const intensity = difficulty >= 4 ? "I need very specific answers." : "Please explain what happens next.";
-
-  const persona =
-    character === "Angry"
-      ? "I am frustrated with how this is being handled."
-      : character === "Anxious"
-        ? "I feel nervous and need reassurance about the process."
-        : "I feel defensive and want clear facts.";
-
-  return `${persona} ${intensity} (${scenarioMeta[scenario].label} simulation)`;
-}
-
 export function PracticeModeUI(): JSX.Element {
   const [scenario, setScenario] = useState<ScenarioKey>("performance");
   const [character, setCharacter] = useState("Defensive");
   const [difficulty, setDifficulty] = useState(3);
   const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [source, setSource] = useState<"openai" | "fallback">("fallback");
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "m0",
       role: "assistant",
-      text: "Practice partner ready. Start with your opening line and meeting objective."
+      text:
+        "Practice partner ready. Performance-mode coaching is active by default with UK employment-process realism. Start with your opening line and meeting objective."
     }
   ]);
 
@@ -57,21 +47,68 @@ export function PracticeModeUI(): JSX.Element {
     };
   }, [messages]);
 
-  const submit = (event: FormEvent): void => {
+  const submit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
-    if (!input.trim()) {
+    const trimmed = input.trim();
+    if (!trimmed || busy) {
       return;
     }
 
-    const userMessage: ChatMessage = { id: String(Date.now()), role: "user", text: input.trim() };
-    const assistantMessage: ChatMessage = {
-      id: String(Date.now() + 1),
-      role: "assistant",
-      text: simulatedReply(character, difficulty, scenario)
-    };
-
-    setMessages((items) => [...items, userMessage, assistantMessage]);
+    const userMessage: ChatMessage = { id: String(Date.now()), role: "user", text: trimmed };
+    const outgoingMessages = [...messages, userMessage];
+    setMessages(outgoingMessages);
     setInput("");
+    setBusy(true);
+
+    try {
+      const response = await fetch("/api/practice/respond", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          scenario,
+          character,
+          difficulty,
+          messages: outgoingMessages.map((entry) => ({
+            role: entry.role,
+            content: entry.text
+          }))
+        })
+      });
+
+      const data = (await response.json().catch(() => ({}))) as {
+        reply?: unknown;
+        source?: unknown;
+        error?: unknown;
+      };
+
+      if (!response.ok || typeof data.reply !== "string" || data.reply.trim().length === 0) {
+        throw new Error(typeof data.error === "string" ? data.error : "Practice response failed");
+      }
+
+      const replyText = data.reply.trim();
+
+      setSource(data.source === "openai" ? "openai" : "fallback");
+      setMessages((items) => [
+        ...items,
+        {
+          id: String(Date.now() + 1),
+          role: "assistant",
+          text: replyText
+        }
+      ]);
+    } catch {
+      setSource("fallback");
+      setMessages((items) => [
+        ...items,
+        {
+          id: String(Date.now() + 1),
+          role: "assistant",
+          text: "I need clearer facts and dates before I can proceed. Please explain the evidence, support offered, and review timeline."
+        }
+      ]);
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -137,7 +174,9 @@ export function PracticeModeUI(): JSX.Element {
               <p className="text-sm font-semibold text-[var(--color-text)]">Conversation Simulator</p>
               <p className="text-xs text-muted">Role-play transcript</p>
             </div>
-            <Chip variant="success">Mock mode</Chip>
+            <Chip variant={source === "openai" ? "success" : "warning"}>
+              {source === "openai" ? "AI mode" : "Fallback mode"}
+            </Chip>
           </div>
         </div>
 
@@ -150,10 +189,15 @@ export function PracticeModeUI(): JSX.Element {
                   ? "ml-auto bg-[var(--color-primary)] text-white"
                   : "bg-[var(--color-surface-2)] text-[var(--color-text)]"
               }`}
-            >
-              {message.text}
-            </div>
-          ))}
+              >
+                {message.text}
+              </div>
+            ))}
+            {busy ? (
+              <div className="inline-flex items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-xs text-muted">
+                Generating response...
+              </div>
+            ) : null}
         </div>
 
         <form onSubmit={submit} className="border-t border-[var(--color-border)] px-5 py-4">
@@ -164,14 +208,14 @@ export function PracticeModeUI(): JSX.Element {
               placeholder="Type your response"
               className="h-11 flex-1 rounded-xl border border-[var(--color-border)] bg-white px-3"
             />
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" disabled={busy || !input.trim()}>
               <Send className="h-4 w-4" />
               Send
             </Button>
           </div>
           <p className="mt-2 text-xs text-muted">
             <Sparkles className="mr-1 inline h-3 w-3" />
-            UI-only simulation with deterministic mock responses.
+            UK employment-process aware simulation. Performance scenario context and difficulty are applied to each AI turn.
           </p>
         </form>
       </Card>

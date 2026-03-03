@@ -98,6 +98,10 @@ If `OPENAI_API_KEY` is missing, generation automatically uses deterministic fall
 - `GET /api/assistant` availability + monitoring snapshot
 - `POST /api/assistant` ResolvePath-focused chat reply with OpenAI/fallback
 
+### Practice Simulator AI
+
+- `POST /api/practice/respond` role-play reply for Practice Mode with UK employment-process aware prompting (OpenAI/fallback)
+
 ## Risk Engine
 
 `lib/server/riskEngine.ts`
@@ -217,6 +221,22 @@ curl -X POST http://localhost:3000/api/assistant \
     "page": "/",
     "messages": [
       { "role": "user", "content": "Show monitoring snapshot" }
+    ]
+  }'
+```
+
+Practice simulator prompt:
+
+```bash
+curl -X POST http://localhost:3000/api/practice/respond \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "scenario": "performance",
+    "character": "Defensive",
+    "difficulty": 3,
+    "messages": [
+      { "role": "assistant", "content": "Practice partner ready." },
+      { "role": "user", "content": "I want to discuss concerns about your recent targets." }
     ]
   }'
 ```
