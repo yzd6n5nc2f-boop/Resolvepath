@@ -208,8 +208,8 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
 
       {step === 1 ? (
         <Card>
-          <h2 className="text-xl font-semibold text-brand-navy">Choose scenario</h2>
-          <p className="mt-1 text-sm text-brand-ink/70">Select a path to preload prompts and templates.</p>
+          <h2 className="text-xl font-semibold text-[var(--color-text)]">Choose scenario</h2>
+          <p className="mt-1 text-sm text-muted">Select a path to preload prompts and templates.</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {scenarioList.map((entry) => {
               const Icon = scenarioIcons[entry];
@@ -221,18 +221,18 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
                   className={cn(
                     "rounded-2xl border p-4 text-left transition",
                     active
-                      ? "border-brand-teal/60 bg-brand-teal/10"
-                      : "border-brand-navy/10 bg-white hover:bg-brand-gray/35"
+                      ? "border-[var(--color-primary)] bg-[var(--color-primary-soft)]"
+                      : "border-[var(--color-border)] bg-white hover:bg-[var(--color-surface-2)]"
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="rounded-xl bg-white p-2 text-brand-navy shadow-soft">
+                    <div className="rounded-xl bg-white p-2 text-[var(--color-text)] shadow-soft">
                       <Icon className="h-4 w-4" />
                     </div>
                     <Chip variant={active ? "selected" : "default"}>{active ? "Selected" : "Select"}</Chip>
                   </div>
-                  <p className="mt-3 text-base font-semibold text-brand-navy">{scenarioMeta[entry].label}</p>
-                  <p className="mt-1 text-sm leading-6 text-brand-ink/80">{scenarioMeta[entry].description}</p>
+                  <p className="mt-3 text-base font-semibold text-[var(--color-text)]">{scenarioMeta[entry].label}</p>
+                  <p className="mt-1 text-sm leading-6 text-muted">{scenarioMeta[entry].description}</p>
                 </button>
               );
             })}
@@ -243,50 +243,50 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
       {step === 2 ? (
         <Card className="grid gap-4 md:grid-cols-2">
           <label className="space-y-1 text-sm">
-            <span className="font-medium text-brand-navy">Employee name</span>
+            <span className="font-medium text-[var(--color-text)]">Employee name</span>
             <input
               value={intake.employee}
               onChange={(event) => setIntake((data) => ({ ...data, employee: event.target.value }))}
-              className="h-11 w-full rounded-xl border border-brand-navy/15 bg-white px-3"
+              className="h-11 w-full rounded-xl border border-[var(--color-border)] bg-white px-3"
               placeholder="Jordan Patel"
             />
           </label>
           <label className="space-y-1 text-sm">
-            <span className="font-medium text-brand-navy">Role</span>
+            <span className="font-medium text-[var(--color-text)]">Role</span>
             <input
               value={intake.role}
               onChange={(event) => setIntake((data) => ({ ...data, role: event.target.value }))}
-              className="h-11 w-full rounded-xl border border-brand-navy/15 bg-white px-3"
+              className="h-11 w-full rounded-xl border border-[var(--color-border)] bg-white px-3"
               placeholder="Customer Success Associate"
             />
           </label>
 
           <label className="space-y-1 text-sm md:col-span-2">
-            <span className="font-medium text-brand-navy">What is the main concern?</span>
+            <span className="font-medium text-[var(--color-text)]">What is the main concern?</span>
             <textarea
               value={intake.concern}
               onChange={(event) => setIntake((data) => ({ ...data, concern: event.target.value }))}
-              className="h-28 w-full rounded-xl border border-brand-navy/15 bg-white px-3 py-2"
+              className="h-28 w-full rounded-xl border border-[var(--color-border)] bg-white px-3 py-2"
               placeholder="Summarize issue with objective facts"
             />
           </label>
 
           <label className="space-y-1 text-sm md:col-span-2">
-            <span className="font-medium text-brand-navy">Prior actions taken</span>
+            <span className="font-medium text-[var(--color-text)]">Prior actions taken</span>
             <textarea
               value={intake.priorActions}
               onChange={(event) => setIntake((data) => ({ ...data, priorActions: event.target.value }))}
-              className="h-24 w-full rounded-xl border border-brand-navy/15 bg-white px-3 py-2"
+              className="h-24 w-full rounded-xl border border-[var(--color-border)] bg-white px-3 py-2"
               placeholder="Check-ins, coaching, informal actions"
             />
           </label>
 
           <label className="space-y-1 text-sm md:col-span-2">
-            <span className="font-medium text-brand-navy">Desired outcome</span>
+            <span className="font-medium text-[var(--color-text)]">Desired outcome</span>
             <textarea
               value={intake.desiredOutcome}
               onChange={(event) => setIntake((data) => ({ ...data, desiredOutcome: event.target.value }))}
-              className="h-24 w-full rounded-xl border border-brand-navy/15 bg-white px-3 py-2"
+              className="h-24 w-full rounded-xl border border-[var(--color-border)] bg-white px-3 py-2"
               placeholder="Expected change and review window"
             />
           </label>
@@ -295,12 +295,12 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
 
       {step === 3 ? (
         <Card>
-          <h2 className="text-xl font-semibold text-brand-navy">Case summary</h2>
-          <p className="mt-1 text-sm text-brand-ink/70">Edit this draft summary before quality checks.</p>
+          <h2 className="text-xl font-semibold text-[var(--color-text)]">Case summary</h2>
+          <p className="mt-1 text-sm text-muted">Edit this draft summary before quality checks.</p>
           <textarea
             value={generatedSummary}
             onChange={(event) => setSummary(event.target.value)}
-            className="mt-4 h-80 w-full rounded-2xl border border-brand-navy/15 bg-white px-4 py-3 text-sm leading-6"
+            className="mt-4 h-80 w-full rounded-2xl border border-[var(--color-border)] bg-white px-4 py-3 text-sm leading-6"
           />
         </Card>
       ) : null}
@@ -309,8 +309,8 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
         <Card>
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="text-xl font-semibold text-brand-navy">Timeline</h2>
-              <p className="text-sm text-brand-ink/70">Add dated events to support chronology.</p>
+              <h2 className="text-xl font-semibold text-[var(--color-text)]">Timeline</h2>
+              <p className="text-sm text-muted">Add dated events to support chronology.</p>
             </div>
             <Button variant="secondary" onClick={() => setEventModalOpen(true)}>
               <Plus className="h-4 w-4" />
@@ -321,14 +321,14 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
           <div className="mt-4 space-y-3">
             {timeline.length ? (
               timeline.map((entry) => (
-                <div key={entry.id} className="rounded-2xl border border-brand-navy/10 bg-brand-gray/30 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-navy/70">{entry.date}</p>
-                  <p className="mt-1 text-sm font-semibold text-brand-navy">{entry.title}</p>
-                  <p className="mt-1 text-sm text-brand-ink/80">{entry.note}</p>
+                <div key={entry.id} className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted">{entry.date}</p>
+                  <p className="mt-1 text-sm font-semibold text-[var(--color-text)]">{entry.title}</p>
+                  <p className="mt-1 text-sm text-muted">{entry.note}</p>
                 </div>
               ))
             ) : (
-              <div className="rounded-2xl border border-dashed border-brand-navy/20 p-6 text-center text-sm text-brand-ink/70">
+              <div className="rounded-2xl border border-dashed border-[var(--color-border)] p-6 text-center text-sm text-muted">
                 No timeline events yet.
               </div>
             )}
@@ -339,30 +339,30 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
       {step === 5 ? (
         <Card className="space-y-5">
           <div>
-            <h2 className="text-xl font-semibold text-brand-navy">Risk flags</h2>
-            <p className="text-sm text-brand-ink/70">Review severity signals before generating outputs.</p>
+            <h2 className="text-xl font-semibold text-[var(--color-text)]">Risk flags</h2>
+            <p className="text-sm text-muted">Review severity signals before generating outputs.</p>
           </div>
 
           <RiskFlagList flags={riskFlags} />
 
-          <div className="rounded-2xl border border-brand-amber/45 bg-brand-amber/15 p-4">
+          <div className="rounded-2xl border border-[var(--color-warning-border)] bg-[var(--color-warning-soft)] p-4">
             <div className="flex items-start gap-3">
-              <div className="rounded-full bg-white p-1.5 text-brand-navy">
+              <div className="rounded-full bg-white p-1.5 text-[var(--color-text)]">
                 <AlertTriangle className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-brand-navy">Safety Gate</p>
-                <p className="mt-1 text-xs leading-5 text-brand-ink">
+                <p className="text-sm font-semibold text-[var(--color-text)]">Safety Gate</p>
+                <p className="mt-1 text-xs leading-5 text-[var(--color-text)]">
                   High-risk scenarios should remain neutral and be reviewed by HR/legal before irreversible action.
                 </p>
               </div>
             </div>
 
             {highRisk ? (
-              <label className="mt-3 flex items-start gap-2 text-sm text-brand-navy">
+              <label className="mt-3 flex items-start gap-2 text-sm text-[var(--color-text)]">
                 <input
                   type="checkbox"
-                  className="mt-1 h-4 w-4 accent-brand-amber"
+                  className="mt-1 h-4 w-4 accent-[var(--color-warning)]"
                   checked={safetyAccepted}
                   onChange={(event) => setSafetyAccepted(event.target.checked)}
                 />
@@ -378,8 +378,8 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
           <Card>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h2 className="text-xl font-semibold text-brand-navy">Outputs Hub</h2>
-                <p className="text-sm text-brand-ink/70">Refine tone, length, and draft quality before sharing.</p>
+                <h2 className="text-xl font-semibold text-[var(--color-text)]">Outputs Hub</h2>
+                <p className="text-sm text-muted">Refine tone, length, and draft quality before sharing.</p>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -412,7 +412,7 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
                 const Icon = item.icon;
                 return (
                   <div key={item.key} className="space-y-2">
-                    <div className="flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wide text-brand-navy/70">
+                    <div className="flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wide text-muted">
                       <Icon className="h-3.5 w-3.5" />
                       {item.label}
                     </div>
@@ -426,16 +426,16 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
               })}
 
               <Card>
-                <h3 className="text-base font-semibold text-brand-navy">Version history</h3>
+                <h3 className="text-base font-semibold text-[var(--color-text)]">Version history</h3>
                 <div className="mt-3 space-y-2">
                   {versions.map((entry) => (
                     <div
                       key={entry.id}
-                      className="flex items-center justify-between rounded-2xl border border-brand-navy/10 bg-brand-gray/25 px-3 py-2"
+                      className="flex items-center justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2"
                     >
                       <div>
-                        <p className="text-sm font-semibold text-brand-navy">{entry.time}</p>
-                        <p className="text-xs text-brand-ink/70">{entry.note}</p>
+                        <p className="text-sm font-semibold text-[var(--color-text)]">{entry.time}</p>
+                        <p className="text-xs text-muted">{entry.note}</p>
                       </div>
                       <Chip variant={entry.mode === "Safety" ? "warning" : "default"}>{entry.mode}</Chip>
                     </div>
@@ -446,15 +446,15 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
 
             <aside className="space-y-4">
               <Card>
-                <h3 className="text-base font-semibold text-brand-navy">Quality Checks</h3>
-                <ul className="mt-3 space-y-2 text-sm text-brand-ink">
+                <h3 className="text-base font-semibold text-[var(--color-text)]">Quality Checks</h3>
+                <ul className="mt-3 space-y-2 text-sm text-[var(--color-text)]">
                   {qualityChecksMock.map((item) => (
-                    <li key={item} className="rounded-xl bg-brand-gray/35 px-3 py-2">
+                    <li key={item} className="rounded-xl bg-[var(--color-surface-2)] px-3 py-2">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <div className="mt-4 rounded-2xl bg-brand-amber/20 p-3 text-xs text-brand-navy">
+                <div className="mt-4 rounded-2xl bg-[var(--color-warning-soft)] p-3 text-xs text-[var(--color-text)]">
                   <p className="font-semibold">HR Review Recommended</p>
                   <p className="mt-1">Apply safety mode for any high-risk flags before communication.</p>
                 </div>
@@ -474,46 +474,46 @@ export function NewCaseWizard({ initialScenario }: { initialScenario?: string })
       </div>
 
       {eventModalOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-navy/35 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 p-4 backdrop-blur-sm">
           <Card className="w-full max-w-lg">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-brand-navy">Add timeline event</h3>
-              <button className="rounded-full p-2 hover:bg-brand-gray/60" onClick={() => setEventModalOpen(false)}>
-                <X className="h-4 w-4 text-brand-navy" />
+              <h3 className="text-lg font-semibold text-[var(--color-text)]">Add timeline event</h3>
+              <button className="rounded-full p-2 hover:bg-[var(--color-surface-2)]" onClick={() => setEventModalOpen(false)}>
+                <X className="h-4 w-4 text-[var(--color-text)]" />
               </button>
             </div>
 
             <div className="mt-4 space-y-3">
               <label className="space-y-1 text-sm">
-                <span className="font-medium text-brand-navy">Date</span>
+                <span className="font-medium text-[var(--color-text)]">Date</span>
                 <input
                   type="date"
                   value={eventDraft.date}
                   onChange={(event) => setEventDraft((valueState) => ({ ...valueState, date: event.target.value }))}
-                  className="h-11 w-full rounded-xl border border-brand-navy/15 bg-white px-3"
+                  className="h-11 w-full rounded-xl border border-[var(--color-border)] bg-white px-3"
                 />
               </label>
 
               <label className="space-y-1 text-sm">
-                <span className="font-medium text-brand-navy">Title</span>
+                <span className="font-medium text-[var(--color-text)]">Title</span>
                 <input
                   value={eventDraft.title}
                   onChange={(event) =>
                     setEventDraft((valueState) => ({ ...valueState, title: event.target.value }))
                   }
-                  className="h-11 w-full rounded-xl border border-brand-navy/15 bg-white px-3"
+                  className="h-11 w-full rounded-xl border border-[var(--color-border)] bg-white px-3"
                   placeholder="Coaching session"
                 />
               </label>
 
               <label className="space-y-1 text-sm">
-                <span className="font-medium text-brand-navy">Note</span>
+                <span className="font-medium text-[var(--color-text)]">Note</span>
                 <textarea
                   value={eventDraft.note}
                   onChange={(event) =>
                     setEventDraft((valueState) => ({ ...valueState, note: event.target.value }))
                   }
-                  className="h-28 w-full rounded-xl border border-brand-navy/15 bg-white px-3 py-2"
+                  className="h-28 w-full rounded-xl border border-[var(--color-border)] bg-white px-3 py-2"
                 />
               </label>
             </div>

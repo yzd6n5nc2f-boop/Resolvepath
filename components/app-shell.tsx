@@ -30,17 +30,17 @@ export function AppShell({ children }: { children: ReactNode }): JSX.Element {
         <SideNav />
 
         <div className="flex min-h-screen flex-1 flex-col">
-          <header className="sticky top-0 z-30 border-b border-brand-navy/10 bg-white/90 backdrop-blur">
+          <header className="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[var(--color-surface)] backdrop-blur">
             <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-3">
                 <Link href="/" className="lg:hidden">
-                  <Image src="/resolvepath-logo.svg" alt="ResolvePath" width={145} height={32} priority />
+                  <Image src="/logo.jpeg" alt="ResolvePath" width={145} height={32} priority />
                 </Link>
-                <h1 className="text-lg font-semibold tracking-tight text-brand-navy">{getTitle(pathname)}</h1>
+                <h1 className="text-lg font-semibold tracking-tight text-[var(--color-text)]">{getTitle(pathname)}</h1>
               </div>
 
               <div className="flex items-center gap-3">
-                <p className="hidden text-xs text-brand-ink/70 md:block">Calm authority drafting interface</p>
+                <p className="hidden text-xs text-[var(--color-text-muted)] md:block">Calm authority drafting interface</p>
                 <Link href="/cases/new">
                   <Button>Start New Case</Button>
                 </Link>
@@ -49,7 +49,7 @@ export function AppShell({ children }: { children: ReactNode }): JSX.Element {
           </header>
 
           <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
-          <footer className="border-t border-brand-navy/10 px-4 py-4 text-center text-xs text-brand-ink/70 sm:px-6 lg:px-8">
+          <footer className="border-t border-[var(--color-border)] px-4 py-4 text-center text-xs text-[var(--color-text-muted)] sm:px-6 lg:px-8">
             InnoWeb Ventures Ltd
           </footer>
         </div>

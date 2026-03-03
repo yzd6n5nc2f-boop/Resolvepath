@@ -1,14 +1,16 @@
 import type { ButtonHTMLAttributes, HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-type ChipVariant = "default" | "selected" | "success" | "warning" | "danger";
+type ChipVariant = "default" | "selected" | "success" | "warning" | "danger" | "info";
 
 const chipStyles: Record<ChipVariant, string> = {
-  default: "bg-brand-gray/75 text-black",
-  selected: "bg-brand-navy text-white ring-1 ring-brand-navy/55",
-  success: "bg-brand-teal/20 text-black",
-  warning: "bg-brand-amber/30 text-black",
-  danger: "bg-[#F9C2B2]/50 text-black"
+  default: "border border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-text-muted)]",
+  selected:
+    "border border-[var(--color-primary)] bg-[var(--color-primary-soft)] text-[var(--color-text)] ring-1 ring-[var(--color-primary)]",
+  success: "border border-[var(--color-success-border)] bg-[var(--color-success-soft)] text-[var(--color-success)]",
+  warning: "border border-[var(--color-warning-border)] bg-[var(--color-warning-soft)] text-[var(--color-warning)]",
+  danger: "border border-[var(--color-danger-border)] bg-[var(--color-danger-soft)] text-[var(--color-danger)]",
+  info: "border border-[var(--color-info-border)] bg-[var(--color-info-soft)] text-[var(--color-info)]"
 };
 
 export function Chip({
@@ -40,7 +42,9 @@ export function ChipButton({
   return (
     <button
       className={cn(
-        "inline-flex h-8 items-center rounded-full px-3 text-xs font-semibold tracking-[0.01em] transition hover:opacity-90",
+        "inline-flex h-8 items-center rounded-full px-3 text-xs font-semibold tracking-[0.01em] transition",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]",
+        "hover:brightness-[0.98]",
         chipStyles[variant],
         className
       )}

@@ -1,18 +1,22 @@
-<svg width="448" height="88" viewBox="0 0 448 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(2 6)">
-    <path d="M9 67V7h24c16 0 27 8 27 21 0 9-5 15-13 18l18 21H47L31 49H22v18H9z" fill="#E14040"/>
-    <path d="M22 37h10c9 0 15-4 15-11 0-8-6-11-15-11H22v22z" fill="#F3F6F9"/>
-    <path d="M13 40c12-9 23-14 34-15 6-1 10 0 13 2-4 1-8 3-11 5-8 5-15 12-22 21l-14-13z" fill="#F3F6F9"/>
-    <circle cx="70" cy="56" r="6" fill="#E14040"/>
+<svg width="800" height="200" viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="200" fill="white"/>
+
+  <!-- Icon (matched to provided crop style) -->
+  <g transform="translate(42,22)">
+    <path d="M12 150V10h62c43 0 72 22 72 56 0 24-14 42-34 50l47 54h-45l-40-45H45v45H12z" fill="#E14040"/>
+    <path d="M45 93h27c24 0 40-11 40-30 0-20-16-30-40-30H45v60z" fill="#F3F6F9"/>
+    <path d="M18 101c23-18 44-28 64-31 10-2 19-1 25 4-9 2-15 5-21 9-15 10-29 23-42 42L18 101z" fill="#F3F6F9"/>
+    <circle cx="163" cy="121" r="12" fill="#E14040"/>
   </g>
 
+  <!-- Wordmark -->
   <text
-    x="96"
-    y="58"
+    x="245"
+    y="122"
     fill="#B64646"
     font-family="Inter, Arial, sans-serif"
-    font-size="64"
+    font-size="92"
     font-weight="600"
-    letter-spacing="0.2"
+    letter-spacing="0"
   >ResolvePath</text>
 </svg>

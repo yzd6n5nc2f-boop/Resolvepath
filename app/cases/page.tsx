@@ -25,14 +25,14 @@ export default function MyCasesPage(): JSX.Element {
   return (
     <div className="space-y-5">
       <Card>
-        <h2 className="text-xl font-semibold text-brand-navy">My Cases</h2>
-        <p className="mt-1 text-sm text-brand-ink/70">UI preview list with scenario, status, and update signals.</p>
+        <h2 className="text-xl font-semibold text-[var(--color-text)]">My Cases</h2>
+        <p className="mt-1 text-sm text-muted">UI preview list with scenario, status, and update signals.</p>
       </Card>
 
       <Card className="overflow-hidden" padded={false}>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[820px] text-sm">
-            <thead className="bg-brand-gray/45 text-left text-xs uppercase tracking-wide text-brand-navy/70">
+            <thead className="bg-[var(--color-surface-2)] text-left text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-5 py-3">Case</th>
                 <th className="px-5 py-3">Scenario</th>
@@ -47,20 +47,20 @@ export default function MyCasesPage(): JSX.Element {
                 <tr
                   key={entry.id}
                   onClick={() => router.push(`/cases/${entry.id}`)}
-                  className="cursor-pointer border-t border-brand-navy/10 hover:bg-brand-gray/20"
+                  className="cursor-pointer border-t border-[var(--color-border)] hover:bg-[var(--color-surface-2)]"
                 >
-                  <td className="px-5 py-3 font-semibold text-brand-navy">{entry.title}</td>
-                  <td className="px-5 py-3 text-brand-ink">{scenarioMeta[entry.scenario].label}</td>
+                  <td className="px-5 py-3 font-semibold text-[var(--color-text)]">{entry.title}</td>
+                  <td className="px-5 py-3 text-[var(--color-text)]">{scenarioMeta[entry.scenario].label}</td>
                   <td className="px-5 py-3">
                     <Chip variant={statusVariant(entry.status)}>{entry.status}</Chip>
                   </td>
-                  <td className="px-5 py-3 text-brand-ink">{entry.owner}</td>
-                  <td className="px-5 py-3 text-brand-ink/80">{entry.lastUpdated}</td>
+                  <td className="px-5 py-3 text-[var(--color-text)]">{entry.owner}</td>
+                  <td className="px-5 py-3 text-muted">{entry.lastUpdated}</td>
                   <td className="px-5 py-3 text-right">
                     <Link
                       href={`/cases/${entry.id}`}
                       onClick={(event) => event.stopPropagation()}
-                      className="inline-flex items-center gap-1 rounded-full border border-brand-navy/15 px-3 py-1.5 text-xs font-semibold text-black"
+                      className="inline-flex items-center gap-1 rounded-full border border-[var(--color-border)] px-3 py-1.5 text-xs font-semibold text-[var(--color-text)]"
                     >
                       View
                       <ChevronRight className="h-3.5 w-3.5" />

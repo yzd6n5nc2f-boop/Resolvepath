@@ -78,16 +78,16 @@ export function PracticeModeUI(): JSX.Element {
     <div className="grid gap-4 xl:grid-cols-[320px_1fr]">
       <Card className="h-fit space-y-4">
         <div>
-          <h2 className="text-xl font-semibold text-brand-navy">Practice Mode</h2>
-          <p className="mt-1 text-sm text-brand-ink/70">Mock simulation to rehearse clarity, empathy, and boundaries.</p>
+          <h2 className="text-xl font-semibold text-[var(--color-text)]">Practice Mode</h2>
+          <p className="mt-1 text-sm text-muted">Mock simulation to rehearse clarity, empathy, and boundaries.</p>
         </div>
 
         <label className="space-y-1 text-sm">
-          <span className="font-medium text-brand-navy">Scenario</span>
+          <span className="font-medium text-[var(--color-text)]">Scenario</span>
           <select
             value={scenario}
             onChange={(event) => setScenario(event.target.value as ScenarioKey)}
-            className="h-11 w-full rounded-xl border border-brand-navy/15 bg-white px-3"
+            className="h-11 w-full rounded-xl border border-[var(--color-border)] bg-white px-3"
           >
             {scenarioList.map((entry) => (
               <option key={entry} value={entry}>
@@ -98,11 +98,11 @@ export function PracticeModeUI(): JSX.Element {
         </label>
 
         <label className="space-y-1 text-sm">
-          <span className="font-medium text-brand-navy">Character</span>
+          <span className="font-medium text-[var(--color-text)]">Character</span>
           <select
             value={character}
             onChange={(event) => setCharacter(event.target.value)}
-            className="h-11 w-full rounded-xl border border-brand-navy/15 bg-white px-3"
+            className="h-11 w-full rounded-xl border border-[var(--color-border)] bg-white px-3"
           >
             <option>Defensive</option>
             <option>Anxious</option>
@@ -111,19 +111,19 @@ export function PracticeModeUI(): JSX.Element {
         </label>
 
         <label className="space-y-1 text-sm">
-          <span className="font-medium text-brand-navy">Difficulty ({difficulty})</span>
+          <span className="font-medium text-[var(--color-text)]">Difficulty ({difficulty})</span>
           <input
             type="range"
             min={1}
             max={5}
             value={difficulty}
             onChange={(event) => setDifficulty(Number(event.target.value))}
-            className="w-full accent-brand-teal"
+            className="w-full accent-[var(--color-primary)]"
           />
         </label>
 
-        <div className="rounded-2xl bg-brand-gray/35 p-3 text-xs text-brand-ink">
-          <p className="font-semibold text-brand-navy">Scorecard (live)</p>
+        <div className="rounded-2xl bg-[var(--color-surface-2)] p-3 text-xs text-[var(--color-text)]">
+          <p className="font-semibold text-[var(--color-text)]">Scorecard (live)</p>
           <p className="mt-1">Clarity: {scorecard.clarity}/5</p>
           <p>Empathy: {scorecard.empathy}/5</p>
           <p>Boundaries: {scorecard.boundaries}/5</p>
@@ -131,11 +131,11 @@ export function PracticeModeUI(): JSX.Element {
       </Card>
 
       <Card className="flex min-h-[620px] flex-col" padded={false}>
-        <div className="border-b border-brand-navy/10 px-5 py-4">
+        <div className="border-b border-[var(--color-border)] px-5 py-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-brand-navy">Conversation Simulator</p>
-              <p className="text-xs text-brand-ink/70">Role-play transcript</p>
+              <p className="text-sm font-semibold text-[var(--color-text)]">Conversation Simulator</p>
+              <p className="text-xs text-muted">Role-play transcript</p>
             </div>
             <Chip variant="success">Mock mode</Chip>
           </div>
@@ -147,8 +147,8 @@ export function PracticeModeUI(): JSX.Element {
               key={message.id}
               className={`max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-6 ${
                 message.role === "user"
-                  ? "ml-auto bg-brand-navy text-white"
-                  : "bg-brand-gray/45 text-brand-ink"
+                  ? "ml-auto bg-[var(--color-primary)] text-white"
+                  : "bg-[var(--color-surface-2)] text-[var(--color-text)]"
               }`}
             >
               {message.text}
@@ -156,20 +156,20 @@ export function PracticeModeUI(): JSX.Element {
           ))}
         </div>
 
-        <form onSubmit={submit} className="border-t border-brand-navy/10 px-5 py-4">
+        <form onSubmit={submit} className="border-t border-[var(--color-border)] px-5 py-4">
           <div className="flex items-center gap-2">
             <input
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder="Type your response"
-              className="h-11 flex-1 rounded-xl border border-brand-navy/15 bg-white px-3"
+              className="h-11 flex-1 rounded-xl border border-[var(--color-border)] bg-white px-3"
             />
-            <Button type="submit" variant="teal">
+            <Button type="submit" variant="primary">
               <Send className="h-4 w-4" />
               Send
             </Button>
           </div>
-          <p className="mt-2 text-xs text-brand-ink/70">
+          <p className="mt-2 text-xs text-muted">
             <Sparkles className="mr-1 inline h-3 w-3" />
             UI-only simulation with deterministic mock responses.
           </p>

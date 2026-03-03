@@ -29,7 +29,7 @@ export function OutputCard({ title, value, onChange }: OutputCardProps): JSX.Ele
   return (
     <Card className="space-y-4">
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-base font-semibold text-brand-navy">{title}</h3>
+        <h3 className="text-base font-semibold text-[var(--color-text)]">{title}</h3>
         <div className="flex items-center gap-2">
           <Button variant="secondary" size="sm" onClick={onCopy}>
             <Clipboard className="h-3.5 w-3.5" />
@@ -46,7 +46,10 @@ export function OutputCard({ title, value, onChange }: OutputCardProps): JSX.Ele
         value={value}
         onChange={(event) => onChange(event.target.value)}
         readOnly={!editing}
-        className="h-52 w-full rounded-2xl border border-brand-navy/12 bg-brand-gray/20 p-3 text-sm leading-6 text-brand-ink outline-none focus:border-brand-teal/50 focus:bg-white"
+        className={
+          "h-52 w-full rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-2)] p-3 text-sm leading-6 text-[var(--color-text)] outline-none transition " +
+          "focus:border-[var(--color-primary)] focus:bg-[var(--color-surface)]"
+        }
       />
     </Card>
   );

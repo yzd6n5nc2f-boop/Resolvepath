@@ -25,16 +25,16 @@ export function TemplatesLibrary(): JSX.Element {
   return (
     <div className="space-y-5">
       <Card>
-        <h2 className="text-xl font-semibold text-brand-navy">Templates Library</h2>
-        <p className="mt-1 text-sm text-brand-ink/70">Filter and preview scenario-specific drafting templates.</p>
+        <h2 className="text-xl font-semibold text-[var(--color-text)]">Templates Library</h2>
+        <p className="mt-1 text-sm text-muted">Filter and preview scenario-specific drafting templates.</p>
 
         <div className="mt-4 grid gap-3 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-navy/50" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              className="h-11 w-full rounded-xl border border-brand-navy/15 bg-white pl-9 pr-3 text-sm"
+              className="h-11 w-full rounded-xl border border-[var(--color-border)] bg-white pl-9 pr-3 text-sm"
               placeholder="Search templates"
             />
           </div>
@@ -59,11 +59,11 @@ export function TemplatesLibrary(): JSX.Element {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {filteredTemplates.map((entry) => (
           <Card key={entry.id} className="h-full transition hover:-translate-y-0.5 hover:shadow-card">
-            <p className="text-xs font-semibold uppercase tracking-wide text-brand-navy/70">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
               {scenarioMeta[entry.scenario].label}
             </p>
-            <h3 className="mt-2 text-base font-semibold text-brand-navy">{entry.name}</h3>
-            <p className="mt-2 text-sm leading-6 text-brand-ink/80">{entry.preview}</p>
+            <h3 className="mt-2 text-base font-semibold text-[var(--color-text)]">{entry.name}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted">{entry.preview}</p>
           </Card>
         ))}
       </div>

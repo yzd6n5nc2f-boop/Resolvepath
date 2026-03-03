@@ -9,7 +9,7 @@ export function Card({ className, padded = true, ...props }: CardProps): JSX.Ele
   return (
     <div
       className={cn(
-        "rounded-3xl border border-brand-navy/10 bg-white shadow-card",
+        "rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-card",
         padded && "p-5 sm:p-6",
         className
       )}

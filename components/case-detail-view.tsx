@@ -35,8 +35,8 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-semibold text-brand-navy">{caseItem.title}</h2>
-            <p className="mt-1 text-sm text-brand-ink/70">
+            <h2 className="text-2xl font-semibold text-[var(--color-text)]">{caseItem.title}</h2>
+            <p className="mt-1 text-sm text-muted">
               {scenarioMeta[caseItem.scenario].label} • Last updated {caseItem.lastUpdated}
             </p>
           </div>
@@ -57,8 +57,8 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
               onClick={() => setActiveTab(tab)}
               className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                 activeTab === tab
-                  ? "bg-brand-navy text-white"
-                  : "bg-brand-gray/60 text-black hover:bg-brand-gray"
+                  ? "bg-[var(--color-primary)] text-white"
+                  : "bg-[var(--color-surface-2)] text-[var(--color-text)] hover:bg-[var(--color-surface-2)]"
               }`}
             >
               {tab}
@@ -70,12 +70,12 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
       {activeTab === "Summary" ? (
         <div className="grid gap-4 xl:grid-cols-[1fr_340px]">
           <Card>
-            <h3 className="text-base font-semibold text-brand-navy">Summary</h3>
-            <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-brand-ink">{caseItem.summary}</p>
+            <h3 className="text-base font-semibold text-[var(--color-text)]">Summary</h3>
+            <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-[var(--color-text)]">{caseItem.summary}</p>
           </Card>
 
           <Card>
-            <h3 className="text-base font-semibold text-brand-navy">Risk signals</h3>
+            <h3 className="text-base font-semibold text-[var(--color-text)]">Risk signals</h3>
             <div className="mt-3">
               <RiskFlagList flags={caseItem.riskFlags} />
             </div>
@@ -85,13 +85,13 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
 
       {activeTab === "Timeline" ? (
         <Card>
-          <h3 className="text-base font-semibold text-brand-navy">Timeline</h3>
+          <h3 className="text-base font-semibold text-[var(--color-text)]">Timeline</h3>
           <div className="mt-4 space-y-3">
             {caseItem.timeline.map((entry) => (
-              <div key={entry.id} className="rounded-2xl border border-brand-navy/10 bg-brand-gray/30 p-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-navy/70">{entry.date}</p>
-                <p className="mt-1 text-sm font-semibold text-brand-navy">{entry.title}</p>
-                <p className="mt-1 text-sm text-brand-ink/80">{entry.note}</p>
+              <div key={entry.id} className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted">{entry.date}</p>
+                <p className="mt-1 text-sm font-semibold text-[var(--color-text)]">{entry.title}</p>
+                <p className="mt-1 text-sm text-muted">{entry.note}</p>
               </div>
             ))}
           </div>
@@ -113,16 +113,16 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
 
           <aside className="space-y-4">
             <Card>
-              <h3 className="text-base font-semibold text-brand-navy">Quality Checks</h3>
+              <h3 className="text-base font-semibold text-[var(--color-text)]">Quality Checks</h3>
               <div className="mt-3 space-y-2">
                 {qualityChecksMock.map((item) => (
-                  <div key={item} className="rounded-xl bg-brand-gray/40 px-3 py-2 text-sm text-brand-ink">
+                  <div key={item} className="rounded-xl bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text)]">
                     {item}
                   </div>
                 ))}
               </div>
 
-              <div className="mt-4 rounded-2xl bg-brand-amber/20 p-3 text-xs text-brand-navy">
+              <div className="mt-4 rounded-2xl bg-[var(--color-warning-soft)] p-3 text-xs text-[var(--color-text)]">
                 <p className="font-semibold">HR Review Recommended</p>
                 <p className="mt-1">{highRisk ? "Safety mode active for this case." : "No high-risk flag, standard mode available."}</p>
               </div>
@@ -133,20 +133,20 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
 
       {activeTab === "Versions" ? (
         <Card>
-          <h3 className="text-base font-semibold text-brand-navy">Version timeline</h3>
+          <h3 className="text-base font-semibold text-[var(--color-text)]">Version timeline</h3>
           <div className="mt-4 space-y-3">
             {caseItem.versions.map((version) => (
               <div
                 key={version.id}
-                className="grid gap-3 rounded-2xl border border-brand-navy/10 bg-brand-gray/20 p-4 md:grid-cols-[auto_1fr_auto] md:items-center"
+                className="grid gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 md:grid-cols-[auto_1fr_auto] md:items-center"
               >
-                <div className="rounded-full bg-white p-2 text-brand-navy shadow-soft">
+                <div className="rounded-full bg-white p-2 text-[var(--color-text)] shadow-soft">
                   <FileClock className="h-4 w-4" />
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-brand-navy">{version.note}</p>
-                  <p className="mt-1 text-xs text-brand-ink/70">{version.time}</p>
+                  <p className="text-sm font-semibold text-[var(--color-text)]">{version.note}</p>
+                  <p className="mt-1 text-xs text-muted">{version.time}</p>
                 </div>
 
                 <Chip variant={version.mode === "Safety" ? "warning" : "default"}>{version.mode}</Chip>
@@ -155,26 +155,26 @@ export function CaseDetailView({ caseItem }: { caseItem: CaseRecord }): JSX.Elem
           </div>
 
           <div className="mt-5 grid gap-3 md:grid-cols-3">
-            <div className="rounded-2xl bg-brand-gray/35 p-3">
-              <div className="flex items-center gap-2 text-brand-navy">
+            <div className="rounded-2xl bg-[var(--color-surface-2)] p-3">
+              <div className="flex items-center gap-2 text-[var(--color-text)]">
                 <Clock3 className="h-4 w-4" />
                 <p className="text-sm font-semibold">Turnaround</p>
               </div>
-              <p className="mt-1 text-xs text-brand-ink/70">Average revision cycle: 18 minutes</p>
+              <p className="mt-1 text-xs text-muted">Average revision cycle: 18 minutes</p>
             </div>
-            <div className="rounded-2xl bg-brand-gray/35 p-3">
-              <div className="flex items-center gap-2 text-brand-navy">
+            <div className="rounded-2xl bg-[var(--color-surface-2)] p-3">
+              <div className="flex items-center gap-2 text-[var(--color-text)]">
                 <CopyCheck className="h-4 w-4" />
                 <p className="text-sm font-semibold">Audit trail</p>
               </div>
-              <p className="mt-1 text-xs text-brand-ink/70">Every generation saved with timestamp</p>
+              <p className="mt-1 text-xs text-muted">Every generation saved with timestamp</p>
             </div>
-            <div className="rounded-2xl bg-brand-gray/35 p-3">
-              <div className="flex items-center gap-2 text-brand-navy">
+            <div className="rounded-2xl bg-[var(--color-surface-2)] p-3">
+              <div className="flex items-center gap-2 text-[var(--color-text)]">
                 <ShieldAlert className="h-4 w-4" />
                 <p className="text-sm font-semibold">Safety mode</p>
               </div>
-              <p className="mt-1 text-xs text-brand-ink/70">Flagged cases preserve neutral escalation language</p>
+              <p className="mt-1 text-xs text-muted">Flagged cases preserve neutral escalation language</p>
             </div>
           </div>
         </Card>

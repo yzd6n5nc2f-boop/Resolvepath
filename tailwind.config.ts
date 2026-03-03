@@ -10,20 +10,26 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          navy: "#921E2B",
-          teal: "#E14040",
-          gray: "#F9C2B2",
-          amber: "#F48787",
-          ink: "#6B2C35",
-          cloud: "#F3F6F9"
+          background: "#F5F7FA",
+          surface: "#FFFFFF",
+          surface2: "#F1F4F8",
+          border: "#D7DDE5",
+          text: "#111111",
+          muted: "#596275",
+          primary: "#E14040",
+          primarySoft: "#FDE9E9",
+          success: "#1F7A4D",
+          warning: "#AD6B17",
+          danger: "#C53F3F",
+          info: "#44638F"
         }
       },
       borderRadius: {
         xl2: "1.25rem"
       },
       boxShadow: {
-        card: "0 10px 30px rgba(146, 30, 43, 0.10)",
-        soft: "0 6px 18px rgba(146, 30, 43, 0.08)"
+        card: "0 14px 30px rgba(17, 24, 39, 0.08)",
+        soft: "0 6px 16px rgba(17, 24, 39, 0.08)"
       }
     }
   },

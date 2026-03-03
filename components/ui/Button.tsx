@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "teal";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
 type ButtonSize = "sm" | "md";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,10 +12,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-brand-navy text-white hover:bg-brand-navy/90",
-  secondary: "border border-brand-navy/25 bg-white text-black hover:bg-brand-gray/45",
-  ghost: "bg-transparent text-black hover:bg-brand-gray/45",
-  teal: "bg-brand-teal text-white hover:bg-brand-teal/90"
+  primary:
+    "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] focus-visible:ring-[var(--color-primary)]",
+  secondary:
+    "border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-2)] focus-visible:ring-[var(--color-info)]",
+  ghost:
+    "bg-transparent text-[var(--color-text)] hover:bg-[var(--color-surface-2)] focus-visible:ring-[var(--color-info)]",
+  destructive:
+    "bg-[var(--color-danger)] text-white hover:bg-[var(--color-danger-hover)] focus-visible:ring-[var(--color-danger)]"
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -34,7 +38,9 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full font-semibold shadow-soft transition disabled:cursor-not-allowed disabled:opacity-45",
+        "inline-flex items-center justify-center gap-2 rounded-full font-semibold shadow-soft transition-colors",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]",
+        "disabled:cursor-not-allowed disabled:opacity-45 disabled:shadow-none",
         variantStyles[variant],
         sizeStyles[size],
         className

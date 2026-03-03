@@ -27,9 +27,9 @@ export function SideNav(): JSX.Element {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden w-[272px] flex-col border-r border-brand-navy/10 bg-white/90 px-5 py-6 backdrop-blur lg:flex">
+    <aside className="hidden w-[272px] flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-6 lg:flex">
       <div className="px-2">
-        <Image src="/resolvepath-logo.svg" alt="ResolvePath" width={170} height={40} priority />
+        <Image src="/logo.jpeg" alt="ResolvePath" width={170} height={40} priority />
       </div>
 
       <nav className="mt-8 space-y-2">
@@ -42,10 +42,10 @@ export function SideNav(): JSX.Element {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition",
+                "relative flex items-center gap-3 rounded-[var(--radius-lg)] border border-transparent px-4 py-3 text-sm font-medium transition",
                 active
-                  ? "bg-brand-navy text-white shadow-soft"
-                  : "text-black hover:bg-brand-gray/65"
+                  ? "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-text)] before:absolute before:bottom-2 before:left-0 before:top-2 before:w-[2px] before:rounded-full before:bg-[var(--color-primary)]"
+                  : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text)]"
               )}
             >
               <Icon className="h-4 w-4" />
@@ -55,7 +55,7 @@ export function SideNav(): JSX.Element {
         })}
       </nav>
 
-      <div className="mt-auto rounded-2xl bg-brand-cloud p-4 text-xs text-brand-ink">
+      <div className="mt-auto rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 text-xs text-[var(--color-text-muted)]">
         <Chip variant="warning" className="mb-2">
           Guidance
         </Chip>
