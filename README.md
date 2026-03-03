@@ -8,6 +8,7 @@ ResolvePath backend persistence and generation APIs for Next.js App Router.
 - TypeScript
 - Prisma + SQLite
 - OpenAI API (optional) with deterministic fallback generation
+- Dashboard AI Support widget (bottom-right) backed by `/api/assistant`
 
 ## Database
 
@@ -91,6 +92,11 @@ If `OPENAI_API_KEY` is missing, generation automatically uses deterministic fall
 - `GET /api/settings`
 - `POST /api/settings/disclaimer`
 - `PUT /api/settings/policy`
+
+### AI Support
+
+- `GET /api/assistant` availability + monitoring snapshot
+- `POST /api/assistant` ResolvePath-focused chat reply with OpenAI/fallback
 
 ## Risk Engine
 
@@ -200,4 +206,17 @@ Save org policy text:
 curl -X PUT http://localhost:3000/api/settings/policy \
   -H 'Content-Type: application/json' \
   -d '{"orgPolicyText":"Follow internal policy steps and HR review for high-risk concerns."}'
+```
+
+AI support prompt:
+
+```bash
+curl -X POST http://localhost:3000/api/assistant \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "page": "/",
+    "messages": [
+      { "role": "user", "content": "Show monitoring snapshot" }
+    ]
+  }'
 ```

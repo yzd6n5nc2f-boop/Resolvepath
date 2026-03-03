@@ -13,6 +13,7 @@ import {
 import { Card } from "@/components/ui/Card";
 import { Chip } from "@/components/ui/Chip";
 import { Button } from "@/components/ui/Button";
+import { AiSupportWidget } from "@/components/ai-support-widget";
 import { mockCases, scenarioList, scenarioMeta } from "@/lib/mock-data";
 
 const scenarioIcons = {
@@ -129,6 +130,8 @@ export default function DashboardPage(): JSX.Element {
           </div>
         </Card>
       </section>
+
+      <AiSupportWidget />
     </div>
   );
 }
