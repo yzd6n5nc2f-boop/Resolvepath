@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS "Case" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "title" TEXT NOT NULL,
     "scenario" TEXT NOT NULL,
-    "status" TEXT NOT NULL DEFAULT 'DRAFT',
+    "status" TEXT NOT NULL DEFAULT 'Draft',
     "summary" TEXT NOT NULL,
     "tonePreference" TEXT NOT NULL DEFAULT 'neutral',
     "lengthPreference" TEXT NOT NULL DEFAULT 'standard',

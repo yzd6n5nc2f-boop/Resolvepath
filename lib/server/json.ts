@@ -40,3 +40,82 @@ export function parseRiskFlags(raw: string): RiskFlag[] {
     return [];
   }
 }
+
+export interface AppliedTemplateSnapshot {
+  id: string;
+  name: string;
+  version: string;
+  body: string;
+}
+
+export function serializeStringArray(value: string[]): string {
+  return JSON.stringify(value);
+}
+
+export function parseStringArray(raw: string): string[] {
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+    return parsed.filter((item) => typeof item === "string");
+  } catch {
+    return [];
+  }
+}
+
+export function serializeTemplateSnapshots(value: AppliedTemplateSnapshot[]): string {
+  return JSON.stringify(value);
+}
+
+export function parseTemplateSnapshots(raw: string): AppliedTemplateSnapshot[] {
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+    return parsed.filter((entry) => {
+      return (
+        entry &&
+        typeof entry === "object" &&
+        typeof entry.id === "string" &&
+        typeof entry.name === "string" &&
+        typeof entry.version === "string" &&
+        typeof entry.body === "string"
+      );
+    }) as AppliedTemplateSnapshot[];
+  } catch {
+    return [];
+  }
+}
+
+export function serializeTemplateValues(value: Record<string, Record<string, string>>): string {
+  return JSON.stringify(value);
+}
+
+export function parseTemplateValues(raw: string): Record<string, Record<string, string>> {
+  try {
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") {
+      return {};
+    }
+
+    const out: Record<string, Record<string, string>> = {};
+    for (const [templateId, values] of Object.entries(parsed as Record<string, unknown>)) {
+      if (!values || typeof values !== "object") {
+        continue;
+      }
+
+      const nested: Record<string, string> = {};
+      for (const [key, value] of Object.entries(values as Record<string, unknown>)) {
+        if (typeof value === "string") {
+          nested[key] = value;
+        }
+      }
+      out[templateId] = nested;
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}

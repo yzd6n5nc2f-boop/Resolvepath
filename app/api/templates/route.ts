@@ -1,19 +1,24 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/server/db";
-import { isScenario } from "@/lib/server/domain";
+import { toApiScenario, toUiScenario } from "@/lib/scenarios";
 
 interface CreateTemplateBody {
   scenario?: unknown;
   name?: unknown;
+  version?: unknown;
   body?: unknown;
 }
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
   const scenarioParam = searchParams.get("scenario");
+  const normalizedScenario = scenarioParam ? toApiScenario(scenarioParam) : null;
+  if (scenarioParam && !normalizedScenario) {
+    return NextResponse.json({ error: "scenario is invalid" }, { status: 400 });
+  }
 
   const templates = await db.template.findMany({
-    where: isScenario(scenarioParam) ? { scenario: scenarioParam } : undefined,
+    where: normalizedScenario ? { scenario: normalizedScenario } : undefined,
     orderBy: [{ scenario: "asc" }, { name: "asc" }]
   });
 
@@ -21,7 +26,9 @@ export async function GET(request: Request): Promise<NextResponse> {
     templates: templates.map((template) => ({
       id: template.id,
       scenario: template.scenario,
+      scenarioUi: toUiScenario(template.scenario),
       name: template.name,
+      version: template.version,
       body: template.body,
       createdAt: template.createdAt.toISOString()
     }))
@@ -30,8 +37,9 @@ export async function GET(request: Request): Promise<NextResponse> {
 
 export async function POST(request: Request): Promise<NextResponse> {
   const body = (await request.json().catch(() => ({}))) as CreateTemplateBody;
+  const scenario = typeof body.scenario === "string" ? toApiScenario(body.scenario) : null;
 
-  if (!isScenario(body.scenario)) {
+  if (!scenario) {
     return NextResponse.json({ error: "scenario is invalid" }, { status: 400 });
   }
 
@@ -45,8 +53,9 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   const created = await db.template.create({
     data: {
-      scenario: body.scenario,
+      scenario,
       name: body.name.trim(),
+      version: typeof body.version === "string" && body.version.trim().length > 0 ? body.version.trim() : "1.0",
       body: body.body.trim()
     }
   });
@@ -56,7 +65,9 @@ export async function POST(request: Request): Promise<NextResponse> {
       template: {
         id: created.id,
         scenario: created.scenario,
+        scenarioUi: toUiScenario(created.scenario),
         name: created.name,
+        version: created.version,
         body: created.body,
         createdAt: created.createdAt.toISOString()
       }

@@ -3,7 +3,6 @@ import { db } from "@/lib/server/db";
 import {
   isGenerationMode,
   isLengthPreference,
-  isScenario,
   isTonePreference,
   type GenerationMode,
   type LengthPreference,
@@ -13,6 +12,7 @@ import { generateOutputs } from "@/lib/server/generateOutputs";
 import { serializeOutputs, serializeRiskFlags } from "@/lib/server/json";
 import { riskEngine } from "@/lib/server/riskEngine";
 import { toOutputVersionResponse } from "@/lib/server/api-helpers";
+import { toApiScenario } from "@/lib/scenarios";
 
 interface Context {
   params: {
@@ -59,7 +59,7 @@ export async function POST(request: Request, context: Context): Promise<NextResp
   const requestedMode: GenerationMode | null = isGenerationMode(body.mode) ? body.mode : null;
   const mode: GenerationMode = risk.highRisk ? "safety" : requestedMode || "standard";
 
-  const scenario = isScenario(caseRecord.scenario) ? caseRecord.scenario : "PERFORMANCE";
+  const scenario = toApiScenario(caseRecord.scenario) || "PERFORMANCE";
 
   const outputs = await generateOutputs(
     {

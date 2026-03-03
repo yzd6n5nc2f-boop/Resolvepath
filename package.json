@@ -8,10 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "sqlite3 prisma/dev.db < prisma/migrations/20260302195000_init/migration.sql",
+    "prisma:migrate": "prisma db push",
     "prisma:seed": "prisma db seed",
-    "db:setup": "sqlite3 prisma/dev.db < prisma/migrations/20260302195000_init/migration.sql && node prisma/seed.js",
-    "test:risk": "tsx --test tests/riskEngine.test.ts"
+    "db:setup": "prisma db push && node prisma/seed.js",
+    "test:risk": "tsx --test tests/riskEngine.test.ts",
+    "test": "tsx --test tests/*.test.ts"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

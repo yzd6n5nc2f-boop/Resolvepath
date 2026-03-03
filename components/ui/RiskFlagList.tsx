@@ -2,13 +2,18 @@ import { AlertTriangle, Info, ShieldAlert } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Chip } from "@/components/ui/Chip";
 import { cn } from "@/lib/utils";
-import type { RiskFlag } from "@/lib/mock-data";
 
 interface RiskFlagListProps {
-  flags: RiskFlag[];
+  flags: Array<{
+    id?: string;
+    code?: string;
+    label: string;
+    severity: "low" | "med" | "high";
+    guidance: string;
+  }>;
 }
 
-function severityVariant(severity: RiskFlag["severity"]): "info" | "warning" | "danger" {
+function severityVariant(severity: "low" | "med" | "high"): "info" | "warning" | "danger" {
   if (severity === "high") {
     return "danger";
   }
@@ -20,7 +25,7 @@ function severityVariant(severity: RiskFlag["severity"]): "info" | "warning" | "
   return "info";
 }
 
-function severityStyles(severity: RiskFlag["severity"]): string {
+function severityStyles(severity: "low" | "med" | "high"): string {
   if (severity === "high") {
     return "border-[var(--color-danger-border)] bg-[var(--color-danger-soft)]";
   }
@@ -32,7 +37,7 @@ function severityStyles(severity: RiskFlag["severity"]): string {
   return "border-[var(--color-info-border)] bg-[var(--color-info-soft)]";
 }
 
-function SeverityIcon({ severity }: { severity: RiskFlag["severity"] }): JSX.Element {
+function SeverityIcon({ severity }: { severity: "low" | "med" | "high" }): JSX.Element {
   if (severity === "high") {
     return <ShieldAlert className="h-4 w-4" />;
   }
@@ -47,8 +52,12 @@ function SeverityIcon({ severity }: { severity: RiskFlag["severity"] }): JSX.Ele
 export function RiskFlagList({ flags }: RiskFlagListProps): JSX.Element {
   return (
     <div className="space-y-3">
-      {flags.map((flag) => (
-        <Card key={flag.id} className={cn("border p-4", severityStyles(flag.severity))} padded={false}>
+      {flags.map((flag, index) => (
+        <Card
+          key={flag.id || flag.code || `${flag.label}-${index}`}
+          className={cn("border p-4", severityStyles(flag.severity))}
+          padded={false}
+        >
           <div className="flex items-start justify-between gap-3">
             <div className="flex gap-3">
               <div className="mt-0.5 rounded-full bg-[var(--color-surface)] p-1.5 text-[var(--color-text)]">

@@ -1,10 +1,10 @@
-export type ScenarioKey =
-  | "performance"
-  | "conduct"
-  | "sickness_absence"
-  | "grievance"
-  | "conflict"
-  | "flexible_working";
+import {
+  scenarioList as scenarioListBase,
+  scenarioMeta as scenarioMetaBase,
+  type ScenarioUI
+} from "@/lib/scenarios";
+
+export type ScenarioKey = ScenarioUI;
 
 export type CaseStatus = "Draft" | "Ready" | "Needs Review";
 
@@ -59,47 +59,8 @@ export interface TemplateRecord {
   preview: string;
 }
 
-export const scenarioMeta: Record<
-  ScenarioKey,
-  {
-    label: string;
-    description: string;
-  }
-> = {
-  performance: {
-    label: "Performance",
-    description: "Structure performance conversations with clarity and fairness."
-  },
-  conduct: {
-    label: "Conduct",
-    description: "Document behavior concerns and guide consistent follow-through."
-  },
-  sickness_absence: {
-    label: "Sickness Absence",
-    description: "Plan supportive check-ins, adjustments, and return discussions."
-  },
-  grievance: {
-    label: "Grievance",
-    description: "Capture concerns, evidence, and clear next procedural steps."
-  },
-  conflict: {
-    label: "Conflict",
-    description: "Prepare mediation conversations and practical reset plans."
-  },
-  flexible_working: {
-    label: "Flexible Working",
-    description: "Assess requests with transparent decision framing."
-  }
-};
-
-export const scenarioList: ScenarioKey[] = [
-  "performance",
-  "conduct",
-  "sickness_absence",
-  "grievance",
-  "conflict",
-  "flexible_working"
-];
+export const scenarioMeta: Record<ScenarioKey, { label: string; description: string }> = scenarioMetaBase;
+export const scenarioList: ScenarioKey[] = scenarioListBase;
 
 export const mockCases: CaseRecord[] = [
   {

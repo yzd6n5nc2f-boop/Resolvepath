@@ -11,10 +11,13 @@ model Case {
   id               String         @id @default(uuid())
   title            String
   scenario         String
-  status           String         @default("DRAFT")
+  status           String         @default("Draft")
   summary          String
   tonePreference   String         @default("neutral")
   lengthPreference String         @default("standard")
+  appliedTemplateIdsJson      String @default("[]")
+  appliedTemplateSnapshotJson String @default("[]")
+  appliedTemplateValuesJson   String @default("{}")
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   timelineEvents   TimelineEvent[]
@@ -53,6 +56,7 @@ model Template {
   id        String   @id @default(uuid())
   scenario  String
   name      String
+  version   String   @default("1.0")
   body      String
   createdAt DateTime @default(now())
 
